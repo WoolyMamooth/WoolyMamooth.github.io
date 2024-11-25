@@ -1,0 +1,77 @@
+<script>
+    function openMenu() { 
+        var navMain = document.getElementById('navMenuId'); 
+        if (navMain.className === 'navMenu') { 
+            navMain.className += ' mobileView'; 
+        } else { 
+            navMain.className = 'navMenu'; 
+        } 
+    }
+    function swap_logo(path){
+        var btn = document.getElementById('logo-btn'); 
+        btn.src=path;
+    }
+</script>
+
+<?php 
+	session_start();
+	$root=$_SERVER['DOCUMENT_ROOT'];
+?>
+<head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF8" >
+        <link rel="stylesheet" href="/style.css">
+        <title>woolym.net</title>
+        <link rel="icon" type="image/x-icon" href="/logo1.ico">
+</head>
+<div class='navMenu' id='navMenuId'>
+    <a href='/index.php' class='main_links'
+        onmouseover='swap_logo("/static/logo1-removebg-black.png")' 
+        onmouseout='swap_logo("/static/logo1-removebg.png")'>
+        <img id='logo-btn' src='/static/logo1-removebg.png' height='50px'>
+    </a>
+
+  	<div class='dropdown'><button class='dropbtn'>Pages I like</button>
+        <div class='dropdown-content'>
+            <a href='https://www.retek.hu/' target='_blank'>retek.hu</a>
+        </div>
+    </div>
+    <div class='dropdown'><button class='dropbtn'>Useful</button>
+        <div class='dropdown-content'>
+            <a href='https://chat.openai.com/chat' target='_blank'>ChatGPT</a>
+            <a href='https://www.perplexity.ai/' target='_blank'>Perplexity</a>
+        </div>
+    </div>
+  	<?php
+  	if (isset($_SESSION['username'])) { ?>
+  	<div class='dropdown'><button class='dropbtn'>Profile</button>
+        <div class='dropdown-content'>
+          	<a href='/sites/user_profile.php'>Profile</a>
+  			<a href='/sites/upload.php'>Upload</a>
+          	<a href='/sites/downloads.php'>Download</a>
+        </div>
+  	</div>
+  	<div class='dropdown'><button class='dropbtn'>Projects</button>
+        <div class='dropdown-content'>
+            <a href='/sites/manga/manga_reader.php'>Manga Reader</a>
+            <a href='/sites/mygames/defenders.php'>Defenders of Avalon</a>
+          	<a href='/sites/FlashGames/game_menu.php'>Flash Games</a>
+          	<a href='/sites/radio.php'>Radio</a>
+        </div>
+  	</div>
+      	<a href='/sites/logout.php' class='main_links'>Log out</a>
+	<?php } else { ?>
+  	<div class='dropdown'><button class='dropbtn'>Projects</button>
+        <div class='dropdown-content'>
+            <a href='/sites/manga/manga_reader.php'>Manga Reader</a>
+            <a href='/sites/mygames/defenders.php'>Defenders of Avalon</a>
+        </div>
+  	</div>
+    <div class='dropdown'><button class='dropbtn'>Login</button>
+        <div class='dropdown-content'>
+            <a href='/sites/login.php'>Login</a>
+      		<a href='/sites/register.php'>Register</a>
+        </div>
+    </div>
+	<?php } ?>
+    <a class='icon' href='javascript:void(0);' onclick='openMenu()'>&#9776;</a>
+</div>
